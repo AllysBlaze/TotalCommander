@@ -4,9 +4,37 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TC"
+        xmlns:vm="clr-namespace:TC.viewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="450" Width="700" ResizeMode="NoResize">
+    <Window.Resources>
+        <vm:ViewModel x:Key="view_model"/>
+    </Window.Resources>
+    <Grid DataContext="{StaticResource ResourceKey=view_model}">
+        <Grid.RowDefinitions> 
+            <RowDefinition Height="9*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
         
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <local:PanelTC Grid.Column="0" 
+                           Sciezka="{Binding Path=lewy.sciezka,Mode=TwoWay}"
+                           Indeks="{Binding lewy.indeks,Mode=TwoWay}"
+                           Kolekcja="{Binding lewy.kolekcja,Mode=TwoWay}"
+                           Dyski="{Binding lewy.DyskiLogiczne, Mode=TwoWay}"
+                           WybranyDysk="{Binding lewy.obecnyDysk,Mode=TwoWay}"/>
+            <local:PanelTC  Grid.Column="1" 
+                           Sciezka="{Binding prawy.sciezka,Mode=TwoWay}"
+                           Indeks="{Binding prawy.indeks,Mode=TwoWay}"
+                           Kolekcja="{Binding prawy.kolekcja,Mode=TwoWay}"
+                           Dyski="{Binding prawy.DyskiLogiczne, Mode=TwoWay}"
+                           WybranyDysk="{Binding prawy.obecnyDysk,Mode=TwoWay}"/>
+            
+        </Grid>
+        <Button x:Name="button" Grid.Row="1" Margin="10" Content=" COPY >>  " Width="100" Command="{Binding kopiuj}" />
     </Grid>
 </Window>
